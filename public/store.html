@@ -13,20 +13,10 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			//var ele = '<div class="alert well col-sm-9"><div class="col-sm-9"><h3>Soccerball</h3><p>Fifa Improved size and weight</p></div><divlass="col-sm-3"><span class="label label-primary ">"$19.20"</span><span class="glyphicon glyphicon-remove-sign" id="removes"></span></div></div>';
-			
-			$.ajax({
-				url: "/items",
-				type:"GET",
-				success:
-					function myFunction(arr) {
-						alert(arr);
-					}
-			});
 			$("#adBtn").on('click',function(e){
 				e.preventDefault();
 				$.ajax({
-					url:"/items",
+					url:"/products",
 					type: "POST",
 					data: {
 						iName:$("input")[1].value,
@@ -34,14 +24,47 @@
 						iPrc:$("input")[3].value
 					},
 					success:
-						
 						function(response){
-							$("#addBlock").append($('<div class="alert well col-sm-9"><div class="col-sm-9"><h3>'+ response.iName+'</h3><p>'+ response.iDesc+'</div><div class="col-sm-3" style="margin-top:20px"><span class="label label-primary">'+"$"+response.iPrc+'</span><span class="glyphicon glyphicon-remove-sign" id="rmv"></span></div>'));
+							$("#addBlock").append($('<div class="alert well col-sm-9"><div class="col-sm-9"><h3>'+ response.iName+'</h3><p>'+ response.iDesc+'</p></div><div class="col-sm-3" style="margin-top:20px"><span class="label label-primary">'+"$"+response.iPrc+'</span><span class="glyphicon glyphicon-remove-sign" id="rmv"></span></div></div>'));
 						}
 				});
+				$("input").val(''); 	
 			});
-			$("#rmv").on('click',function () {
+			$.ajax({
+				url: "/products",
+				type:"GET",
+				success:
+					function myFunction(arr) {
+						var out = '';
+						var i = 0 ;
+						for(i = 0; i < arr.length; i++){
+							out += '<div class="alert well col-sm-9" id="'+arr[i].id+'" ><div class="col-sm-9"><h3>'+ arr[i].iName+'</h3><p>'+ arr[i].iDesc+'</p></div><div class="col-sm-3" style="margin-top:20px"><span class="label label-primary">'+"$"+arr[i].iPrc+'</span><span class="glyphicon glyphicon-remove-sign" id="rmv"></span></div></div>';
+						}
+						$("#addBlock").append(out);
+
+					}
+			});
+			$("#addBlock").on('click',"#rmv",function () {
 				
+				var ID = $(this).closest("div").parent().attr('id');
+				$.ajax({
+					
+					url:"/products",
+					context:ID,
+					dataType:"json",
+					success:
+						function () {
+							$.ajax({
+							    url: "/products/"+this,
+							    type: 'DELETE',
+							    success: 
+							    	function(){
+							    		alert("Product has been successfully removed");
+							    	},
+							});
+							console.log(this); 
+						}
+				});
 				$(this).closest("div").parent().remove();	
 			});
 			
