@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body >
+  <p class = "hide"> This is  the first blog ever using JS DOM which is used to manipulate the html as well as css elements and its content</p>
+  <img class = "hide" src = "http://www.gettyimages.pt/license/502333031" alt = "base ball image" height="100px" width = "100px"></img><br/>
+
+  <button id= "bhide">Click here to hide contents</button>  
+  <button id="bsee">Double Click here to see contents</button>
+  <button id="btoggle">mouse over to hide mout to see </button>
+<ul id="uol" class="hide">
+    <li>
+      ul 1
+    </li>
+    <li>
+      ul 2
+    </li>
+    <li>
+     ul 3
+    </li>
+</ul>
+<script>
+  var p = document.getElementById("bhide");
+    p.addEventListener("click",popout);
+
+  var q = document.getElementById("bsee");
+    q.addEventListener("dblclick",show);
+
+  var r = document.getElementById("btoggle");
+   r.addEventListener("mouseover",(function () { return  function f(){
+      document.getElementById("uol").style.visibility = "hidden";
+      }})());
+r.addEventListener("mouseout" ,g);
+var x = document.getElementsByClassName("hide");
+function popout(){
+  for (var i = x.length-1 ; i >= 0  ; i--)
+    x[i].style.visibility ="hidden";
+}
+
+function show(){
+
+  for (var i = x.length - 1; i >= 0; i--) 
+    x[i].style.visibility ="visible";
+  }
+
+
+function g(){
+  document.getElementById("uol").style.visibility = "visible";
+}
+</script>
+
+
+</body>
+</html>

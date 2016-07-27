@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkboxes</title>
+	<style type="text/css">
+		table {
+		    border-collapse: collapse;
+		    margin: auto;
+		}
+
+		table, td {
+		    border: 1px solid black;
+		    padding: 10px;
+		}
+		input:hover,span:hover{
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("button").on("click",function(){
+				var frt = prompt("Enter the fruit that you want to enter in the list below:");
+				$("#dv").append($("<div><input type='checkbox' name="+frt+"><span>"+frt+"</span></div>"));
+				})
+
+			$("#dv").on("click","input,span",function(){
+				if(this.tagName.toLowerCase()==="input")
+			        processChckBx.call(this);
+			    else if(this.tagName.toLowerCase()==="span"){
+			    	var spn = this.previousElementSibling;
+				   	spn.checked = !spn.checked;
+					processChckBx.call(spn);
+			    }
+				})
+			});
+
+		function processChckBx(){
+			var txt = $(this).next().html();
+			if(this.checked){
+				$("#main").append($("<li></li>").text(txt));
+			}
+			else{
+				$('li').filter(function() { return $.text([this]) === txt; }).remove();
+			}
+		}
+    </script>
+</head>
+
+<body>
+ <div style="margin-top:15%">
+	<table>
+		<tr>
+			<td id="chkContainer" style=":hover{cursor:pointer}">
+				<div id="dv">
+					<div><input type="checkbox" name="apple"><span>Apple</span></div>
+					<div><input type="checkbox" name="Orange"><span>Orange</span></div>
+					<div><input type="checkbox" name="Grape"><span>Grape</span></div>
+					<div><input type="checkbox" name="Pinaple"><span>Pinaple</span></div>
+					<div><input type="checkbox" name="Strawbarry"><span>Strawbarry</span></div>
+				</div>
+				<button>Click to enter fruits</button>
+			</td>
+			<td>
+				<ul id="main">
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
+

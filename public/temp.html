@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temprature</title>
+	<style>
+		input[type=text]{
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+<form>
+	<label for="temp">Enter temperature in Fahrenheit to convert it into Celcius</label><br/>
+	<input type="text" id="ftemp" class="r" name="ft" onkeyup="ctemp()"></form>
+</form>
+<p>The temperature in Fahrenheit is :<span id = "ct"></span></p>
+<script>
+    var y = document.getElementById("ftemp");
+    var ctemp = function(){
+
+    	var x = y.value;
+    	
+    	out: {
+    		if(!isNaN(x) || x.length == 0){
+    			var result;
+    			(x.length == 0)?result="":result=parseInt((x-32)*5/9);
+	    	document.getElementById("ct").innerHTML = result;
+	        break out;
+	    }
+	    else{
+            y.style.backgroundColor="red";
+            alert("Enter valid temperature.");
+            y.value="";
+	        y.style.backgroundColor = "white";
+	    }
+}
+}
+    
+	
+</script>
+</body>
+</html>
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkboxes</title>
+	<style type="text/css">
+		table {
+		    border-collapse: collapse;
+		    margin: auto;
+		}
+
+		table, td {
+		    border: 1px solid black;
+		    padding: 10px;
+		}
+		input:hover,span:hover{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div style="margin-top:15%">
+	<table>
+		<tr>
+			<td id="chkContainer" style=":hover{cursor:pointer}">
+				<div id="dv">
+					<div><input type="checkbox" name="apple"><span>Apple</span></div>
+					<div><input type="checkbox" name="apple"><span>Orange</span></div>
+					<div><input type="checkbox" name="apple"><span>Grape</span></div>
+					<div><input type="checkbox" name="apple"><span>Pinaple</span></div>
+					<div><input type="checkbox" name="apple"><span>Strawbarry</span></div>
+				</div>
+				<button>Click to enter fruits</button>
+			</td>
+			<td>
+				<ul id="main">
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+	document.getElementById('chkContainer').addEventListener('click',function(e){
+		var tag = e.target.tagName.toLowerCase();
+		if(tag === "span"){
+			e.target.previousElementSibling.checked = !e.target.previousElementSibling.checked; 
+			processCheckbox.call(e.target.previousElementSibling);
+		} else if(tag === "input"){
+			processCheckbox.call(e.target);
+		} else if(tag === "button"){
+			addFruit();
+		}
+
+	});
+
+	function addFruit(){
+		var frt = prompt('Add fruits that you want to add in the list below:');
+		var add = document.createElement("DIV");
+		add.innerHTML="<input type='checkbox' name="+frt+"><span>" +frt+ "</span>" ;
+		document.getElementById('dv').appendChild(add);       
+	}
+	function processCheckbox(){
+		
+		if(this.checked){
+			var li = document.createElement('LI');	
+			li.innerHTML = this.nextElementSibling.innerHTML;
+			document.getElementById('main').appendChild(li);
+		} else {
+			var lis = document.querySelectorAll('#main li');
+			for (var i = lis.length - 1; i >= 0; i--) {
+				if(lis[i].innerHTML === this.nextElementSibling.innerHTML){
+					lis[i].parentNode.removeChild(lis[i]);
+					break;
+				}
+			}
+		}
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
