@@ -1,0 +1,17 @@
+<div class="col-sm-9">
+	<div class="form-group">
+		<form class="form-inline">
+			<label>Search:</label><input type="text" class="form-control input-sm" maxlength="64" placeholder="SearchByItemName" ng-model="searchItem" />
+		</form>
+	</div>
+	<div class="form-group"> 
+		<form class="form-inline">
+			<label >Add Item:</label>
+			<input type="text" class="form-control input-sm " maxlength="64" placeholder="ItemName" name="iName" ng-model="itemName" required="required" />
+			<input type="text" class="form-control input-sm " maxlength="64" placeholder="Description" name="iDesc" ng-model="itemDesc" required="required" />
+			<input type="number" class="form-control input-sm " maxlength="64" placeholder="Price" name="iPrc" ng-model="itemPrice" required="required" />
+			<input type="submit" value="ADD" ng-click="clicked()"> 
+		</form>
+	</div>
+</div>
+<product-details></product-details>

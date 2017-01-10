@@ -1,0 +1,14 @@
+<div class="col-sm-9">
+	<div class="alert well col-sm-9" ng-repeat="(key,val) in itName | filter : {'iName' : searchItem} | orderBy : iDesc" id="{{val.id}}">
+    	<div class="col-sm-9">
+    		<h3>{{::val.iName}}</h3>
+    		<p>{{::val.iDesc}}</p>
+    	</div>
+    	<div class="col-sm-2" style="margin:20px 0px 0px 0px">
+    		<span class="label label-primary">$ {{::val.iPrc}}</span>
+    	</div>
+    	<div class="col-sm-1" style="margin:20px 0px 0px 0px">
+    		<span class="glyphicon glyphicon-remove-sign" ng-click="rmv($index)" id= "rmv" margin:20px 0px 0px 10px></span>
+    	</div>
+    </div>
+</div>

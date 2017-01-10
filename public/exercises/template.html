@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/template" id="templt" src="angular_store.js">
+			{{#each this}}
+		    <div class="alert well col-sm-9" id="{{id}}">
+		    	<div class="col-sm-9">
+		    		<h3>{{iName}}</h3>
+		    		<p>{{iDesc}}</p>
+		    	</div>
+		    	<div class="col-sm-2" style="margin:20px 0px 0px 0px">
+		    		<span class="label label-primary">$ {{iPrc}}</span>
+		    	</div>
+		    	<div class="col-sm-1" style="margin:20px 0px 0px 0px">
+		    		<span class="glyphicon glyphicon-remove-sign" id="rmv" margin:20px 0px 0px 10px></span>
+		    	</div>
+		 	</div>
+		 	{{/each}}
+	</script>
+</body>
+</html>
