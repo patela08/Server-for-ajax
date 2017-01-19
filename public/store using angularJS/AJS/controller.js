@@ -1,6 +1,5 @@
 // Controller
 app.controller("myCtrl", ["$scope" ,"myFactory" , function ($scope, myFactory){
-	
 	$scope.getAllData = function(){
 		myFactory.getData()
 		.then(function (response){
@@ -18,13 +17,14 @@ app.controller("myCtrl", ["$scope" ,"myFactory" , function ($scope, myFactory){
 				$scope.itemName = "";
 				$scope.itemDesc = "";
 				$scope.itemPrice = "";
-				alert("Product has been added successfully!");
+				angular.element(document.querySelector("#myModal")).display;
+				$scope.$parent.modal = "Product has been added successfully!";
 			},function (err){
-				alert(err);
+				$scope.$parent.modal = "There is an error while  posting the data on the server"
 			});
 		}
 		else{
-			alert("Please fill the form!");
+            $scope.$parent.modal = "Please fill the Form";
 		}
 	}
 
@@ -33,7 +33,7 @@ app.controller("myCtrl", ["$scope" ,"myFactory" , function ($scope, myFactory){
 			myFactory.removeData(this.val.id)
 			.then(function(response){
 				$scope.itName.splice(id,1);
-				alert("Product has  been removed successfully!!");
+                $scope.$parent.modal = "Product has  been removed successfully!!"
 			},function(err){
 				alert(err);
 			});
